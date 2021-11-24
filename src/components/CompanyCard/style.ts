@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    background-color: #F6F7F8;
-    width: 50%;
+    background-color: #fff;
+    width: 90%;
     height: 10rem;
-    border-radius: 7px;
-    margin: 1rem 0;
+    margin-bottom: .5rem;
     padding: 1rem;
     position: relative;
     cursor: pointer;
+    border: 1px solid #9fa2a6;
+    border-radius: 6px;
+
+    &:hover {
+        box-shadow: 0 8px 10px 0 #9fa2a6;
+    }
 `
 
 export const Title = styled.div`
@@ -36,13 +41,9 @@ export const Tags = styled.div`
 `
 
 export const Tag = styled.div`
-    background-color: #202C39;
+    background-color: #56494C;
     color: #fff;
     padding: .5rem;
     border-radius: 100px;
     margin: 0 .3rem;
-`
-
-export const MoreTag = styled.div`
-
 `

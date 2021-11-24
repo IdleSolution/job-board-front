@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
     width: 100%;
     height: 1rem;
-    background-color: #283845;
+    background-color: #56494C;
     display: flex;
     align-items: center;
     padding: 2rem 0;
@@ -11,14 +11,14 @@ export const Container = styled.div`
 
     p {
         margin-left: 2rem;
-        color: #FFFFFF;
+        color: #fff;
     }
 `
 
 export const NavigationContainer = styled.div`
     width: 100%;
     height: .5rem;
-    background-color: #283845;
+    background-color: #56494C;
     padding: 2rem 0;
     border-bottom: 1px solid #000;
     display: flex;
@@ -36,7 +36,7 @@ export const NavigationGroup = styled.div`
 export const SingleNavigation = styled.div`
     display: flex;
     align-items: center;
-    color: #FFFFFF;
+    color: #fff;
     font-size: 1.4rem;
     margin: 0 1rem;
     cursor: pointer;
@@ -50,7 +50,7 @@ export const SingleNavigation = styled.div`
 export const SingleNavigationActive = styled.div`
     display: flex;
     align-items: center;
-    color: #FFFFFF;
+    color: #fff;
     font-size: 1.4rem;
     margin: 0 1rem;
     cursor: pointer;
@@ -58,11 +58,11 @@ export const SingleNavigationActive = styled.div`
     p {
         margin-left: .5rem;
     }
-    border-bottom: 1px solid #58cae0;
+    border-bottom: 1px solid #fff;
 `
 
 export const ButtonCreateReview = styled.button`
-    background-color: #202C39;
+    background-color: #847E89;
     color: #fff;
     text-decoration: none;
     display: inline-block;
@@ -71,4 +71,5 @@ export const ButtonCreateReview = styled.button`
     font-size: 1rem;
     cursor: pointer;
     border: 1px solid #000;
+    border-radius: 5px;
 `
