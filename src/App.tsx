@@ -1,20 +1,21 @@
 import React from 'react';
-import { CompanyCards } from './components/CompanyCards';
-import { Filters } from './components/Filters';
 import { Navbar } from './components/Navbar';
 import './index.css';
-import { CardsAndFilterContainer } from './components/CompanyCards/style';
 import { Header } from './components/Header';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Homepage } from './components/Pages/Homepage/index';
+import { Company } from './components/Company';
 
 function App() {
   return (
     <div>
       <Navbar />
-      <Header />
-      <CardsAndFilterContainer>
-        <Filters />
-        <CompanyCards />
-      </CardsAndFilterContainer>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Homepage />}/>
+          <Route path='company/:name' element={<Company />}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

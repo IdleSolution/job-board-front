@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import theme from './../../common/colors';
 
 export const Container = styled.div`
     width: 100%;
     height: 1rem;
-    background-color: #56494C;
+    background-color: ${theme.dark};
     display: flex;
     align-items: center;
     padding: 2rem 0;
@@ -18,7 +19,7 @@ export const Container = styled.div`
 export const NavigationContainer = styled.div`
     width: 100%;
     height: .5rem;
-    background-color: #56494C;
+    background-color: ${theme.dark};
     padding: 2rem 0;
     border-bottom: 1px solid #000;
     display: flex;
@@ -62,7 +63,7 @@ export const SingleNavigationActive = styled.div`
 `
 
 export const ButtonCreateReview = styled.button`
-    background-color: #847E89;
+    background-color: ${theme.light};
     color: #fff;
     text-decoration: none;
     display: inline-block;

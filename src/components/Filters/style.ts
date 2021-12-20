@@ -3,8 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
     background-color: #fff;
     width: 30%;
-    margin-left: 5%;
-    margin-right: .5rem;
+    margin-right: 1.1rem;
     border: 1px solid #9fa2a6;
     border-radius: 6px;
 `
@@ -13,11 +12,13 @@ export const Header = styled.div`
     border-bottom: 1px solid #9fa2a6;
     padding: 1rem;
     font-size: 1.2rem;
+    
 `
 
 export const Input = styled.div`
     border-bottom: 1px solid #9fa2a6;
     padding: 2rem;
+    padding-top: 1rem;
 
 
     p {
