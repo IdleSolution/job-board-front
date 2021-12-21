@@ -1,11 +1,15 @@
+import { ICompanyPreview } from "../../common/interfaces/CompanyPreview.interface";
 import { CompanyCard } from "../CompanyCard";
 import { Container } from "./style";
 
-export const CompanyCards = () => (
+interface IProps {
+    companies: ICompanyPreview[],
+}
+
+export const CompanyCards: React.FC<IProps> = ({companies}) => (
     <Container>
-        <CompanyCard />
-        <CompanyCard />
-        <CompanyCard />
-        <CompanyCard />
+        {companies.map(company => (
+            <CompanyCard company={company}/>
+        ))}
     </Container>
 )

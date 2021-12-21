@@ -1,11 +1,12 @@
 import { Container, NavigationContainer, NavigationGroup, SingleNavigation, SingleNavigationActive, ButtonCreateReview } from './style'
 import { faBuilding, faStickyNote } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from 'react-router-dom';
 
 export const Navbar = () => (
     <div>
         <Container>
-            <p>Staże Dla Studentów</p>
+            <Link to='/'><p>Staże Dla Studentów</p></Link>
         </Container>
         <NavigationContainer>
             <NavigationGroup>

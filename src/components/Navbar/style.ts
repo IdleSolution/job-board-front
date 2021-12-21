@@ -13,6 +13,7 @@ export const Container = styled.div`
     p {
         margin-left: 2rem;
         color: #fff;
+        cursor: pointer;
     }
 `
 

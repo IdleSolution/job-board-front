@@ -9,7 +9,6 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     border-radius: 7px;
-    display: flex;
 
     p {
         margin-left: 3rem;

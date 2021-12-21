@@ -4,13 +4,13 @@ import './index.css';
 import { Header } from './components/Header';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Homepage } from './components/Pages/Homepage/index';
-import { Company } from './components/Company';
+import { Company } from './components/Pages/Company';
 
 function App() {
   return (
     <div>
-      <Navbar />
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route path='/' element={<Homepage />}/>
           <Route path='company/:name' element={<Company />}/>
