@@ -1,34 +1,33 @@
 import { Container, Header, Input, Tags } from "./style"
 
-export const Filters = () => (
-    <Container>
-        <Header>
-            <h2>Filtruj firmy</h2>
-        </Header>
+interface IProps {
+    onSearchName: (e: any) => void;
+    onFilterTag: (e: any) => void;
+    tags: string[];
+}
 
-        <Input>
-            <p>Nazwa</p>
-            <input />
-        </Input>
+export const Filters: React.FC<IProps> = ({onSearchName, onFilterTag, tags}) => {
+    return (
+        <Container>
+            <Header>
+                <h2>Filtruj firmy</h2>
+            </Header>
 
-        <Tags>
-            <p>Tagi</p>
-            <div>
-                <input type="checkbox" id="nodejs" name="Node.js"/>
-                <label>Node.js</label>
-            </div>
-            <div>
-                <input type="checkbox" id="js" name="Javascript"/>
-                <label>Javascript</label>
-            </div>
-            <div>
-                <input type="checkbox" id="react" name="React"/>
-                <label>React</label>
-            </div>
-            <div>
-                <input type="checkbox" id="cs" name="C#"/>
-                <label>C#</label>
-            </div>
-        </Tags>
-    </Container>
-)
+            <Input>
+                <p>Nazwa</p>
+                <input onChange={onSearchName}/>
+            </Input>
+
+            <Tags>
+                <p>Tagi</p>
+                {tags.map(tag => (
+                    <div>
+                        <input type="checkbox" id={tag} name={tag} onChange={onFilterTag} defaultChecked={true}/>
+                        <label htmlFor={tag}>{tag}</label>
+                    </div>
+                ))}
+            </Tags>
+        </Container>
+    )
+
+}
