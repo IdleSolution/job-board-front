@@ -3,6 +3,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ICompanyPreview } from "../../../common/interfaces/CompanyPreview.interface";
 import { useState } from "react";
+import {Link} from "react-router-dom";
 
 interface IProps {
     company: ICompanyPreview,
@@ -24,7 +25,7 @@ export const CompanyHeader: React.FC<IProps> = ({company, setPage}) => {
                     <h1>{company.name}</h1>
                     <RatingContainer>
                         <FontAwesomeIcon icon={faStar} style={{marginRight: '.2rem' }}/>
-                        <p>{company.rating > 0 ? `${company.rating} / 5` : 'brak'}</p>
+                        <p>{company.rating > 0 ? `${company.rating.toFixed(2)} / 5` : 'brak'}</p>
                     </RatingContainer>
                 </NameRating>
                 <Navbar>
@@ -37,8 +38,8 @@ export const CompanyHeader: React.FC<IProps> = ({company, setPage}) => {
                             <p>Pytań</p>
                         </NavbarItem>
                         <ButtonsContainer>
-                            <Button>Stwórz recenzję</Button>
-                            <Button>Stwórz Pytania</Button>
+                            <Button><Link to={`/company/${company.name}/review`}>Stwórz recenzję</Link></Button>
+                            <Button><Link to={`/company/${company.name}/interview`}>Stwórz Pytania</Link></Button>
                         </ButtonsContainer> 
                 </Navbar>
             </Section>

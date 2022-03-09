@@ -9,6 +9,7 @@ import { ICompanyPreview } from "../../../common/interfaces/CompanyPreview.inter
 import { IReview } from "../../../common/interfaces/Review.interface";
 import { IInterview } from "../../../common/interfaces/Interview.interface";
 import { CompanyInterview } from "../../Company/CompanyInterview";
+import Spinner from "../../Spinner";
 
 
 export const Company = (props: any) => {
@@ -44,7 +45,7 @@ export const Company = (props: any) => {
                     <CompanyInterview interview={interview}/>
                 ))}
             </Container>
-            ) : (<div style={{textAlign: 'center', marginTop: '5rem', fontSize: '5rem'}}>Loading...</div>)
+            ) : (<div style={{width: '100%', display: 'flex', justifyContent: 'center', marginTop: '10rem'}}><Spinner /></div>)
         }
         </>
     )

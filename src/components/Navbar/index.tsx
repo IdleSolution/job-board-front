@@ -12,7 +12,7 @@ export const Navbar = () => (
             <NavigationGroup>
                 <SingleNavigationActive>
                     <FontAwesomeIcon icon={faBuilding}/>
-                    <p>Firmy</p>
+                    <Link to='/'><p>Firmy</p></Link>
                 </SingleNavigationActive>
 
                 <SingleNavigation>
@@ -21,7 +21,8 @@ export const Navbar = () => (
                 </SingleNavigation>
 
             </NavigationGroup>
-            <ButtonCreateReview>Stwórz nową recenzje</ButtonCreateReview>
+            {/*<ButtonCreateReview>Stwórz nową recenzje</ButtonCreateReview>*/}
+            <div />
         </NavigationContainer>
     </div>
 
