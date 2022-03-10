@@ -3,6 +3,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IReview } from "../../../common/interfaces/Review.interface";
 
+
 interface IProps {
     review: IReview
 }
@@ -10,10 +11,20 @@ interface IProps {
 export const CompanyReview: React.FC<IProps> = ({review}) => {
     // @ts-ignore
     const d = new window.Date(review.issued).toDateString();
+    var DateOptions = {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric"
+    }
+    // @ts-ignore
+    const f = review.from ? new window.Date(review.from).toLocaleString('pl-PL', DateOptions) : null;
+    // @ts-ignore
+    const t = review.to ? new window.Date(review.to).toLocaleString('pl-PL', DateOptions) : null;
+    const workPeriodFormat = t || f ? String("Od: " + f + ' do: ' + t) : null;
     return (
         <Container>
             <Content>
-                <WorkPeriod>Currently working</WorkPeriod>
+                <WorkPeriod>{workPeriodFormat}</WorkPeriod>
                 <NameRating>
                     <h2>{review.position}</h2>
                     <RatingContainer>
