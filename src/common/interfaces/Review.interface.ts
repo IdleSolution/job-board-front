@@ -5,4 +5,5 @@ export interface IReview {
     from: string,
     to: string,
     issued: string,
+    isStillWorking: boolean,
 }
