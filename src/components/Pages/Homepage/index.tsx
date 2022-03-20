@@ -64,13 +64,8 @@ export const Homepage = () => {
 
   return (
     <Container>
-      <Header text='Najlepsze firmy stażowe'/>
-      <CardsAndFilterContainer>
         <Filters onSearchName={onSearchName} tags={tags} onFilterTag={onFilterTag}/>
-        {companies && chosenTags ? (
-          <CompanyCards companies={companiesFiltered}/>
-        ): <div style={{width: '100%', display: 'flex', justifyContent: 'center', marginTop: '10rem'}}><Spinner /></div>}
-      </CardsAndFilterContainer>
+        <CompanyCards companies={companiesFiltered}/>
     </Container>
   )
 }

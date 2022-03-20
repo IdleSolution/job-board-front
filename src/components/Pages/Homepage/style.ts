@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.form`
-    width: 90%;
-    display: flex;
-    flex-flow: column;
-    margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  margin: 0 auto;
+  align-items: center;
 `

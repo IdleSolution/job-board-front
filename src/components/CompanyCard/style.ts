@@ -8,11 +8,11 @@ export const Container = styled.div`
     padding: 1.5rem 1rem 1rem 1rem;
     position: relative;
     cursor: pointer;
-    border: 1px solid #9fa2a6;
+    border: 1px solid rgb(196, 196, 196);
     border-radius: 6px;
 
     &:hover {
-        box-shadow: 0 8px 10px 0 #284dc7;
+        box-shadow: 0 1px 2px 0 #284dc7;
     }
 `
 
@@ -41,7 +41,7 @@ export const Tags = styled.div`
 `
 
 export const Tag = styled.div`
-    background-color: ${theme.dark};
+    background-color: rgb(105, 131, 250);
     color: #fff;
     padding: .5rem;
     border-radius: 100px;

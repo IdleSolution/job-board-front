@@ -5,7 +5,7 @@ html {
     box-sizing: border-box;
     overflow-y: scroll;
     font-size: 16px;
-    background-color: #639cd9;
+    background-color: #fff;
   
   }
   body {
@@ -13,7 +13,7 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: hsla(0, 0%, 0%, 0.8);
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: normal;
     word-wrap: break-word;
     font-kerning: normal;
