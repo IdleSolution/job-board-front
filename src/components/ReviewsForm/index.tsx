@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import { Container, SingleInputContainer, Input, TagAndScoreContainer, AllInputsContainer,
-    Select, TextArea, DatesContainer, DateContainer, SubmitButton, ButtonContainer } from './style';
+    Select, TextArea, DatesContainer, DateContainer, SubmitButton, ButtonContainer, CurrentlyWorkingContainer } from './style';
 import DatePicker from "react-datepicker";
 import { useEffect, useState } from 'react';
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,6 +8,7 @@ import axios from "axios";
 import Spinner from "../Spinner";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import { RatingStar } from "rating-star";
 
 
 interface InputData {
@@ -22,15 +23,22 @@ export const ReviewsForm = () => {
     const navigate = useNavigate();
 
     const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [endDate, setEndDate] = useState<Date | null>(null);
     const [tags, setTags] = useState<string[]>([]);
+    const [rating, setRating] = useState<number>(1);
     const [loading, setLoading] = useState(false);
+    const [currentlyWorking, setCurrentlyWorking] = useState(false);
     const [input, setInput] = useState<InputData>({
         position: '',
         rating: '1',
         comment: '',
         tag: ''
     });
+
+    const onRatingChange = (score: any) => {
+        setRating(score);
+        setEndDate(null);
+    };
 
     useEffect(() => {
         (async () => {
@@ -57,7 +65,7 @@ export const ReviewsForm = () => {
         const timestamp = endDate - startDate;
         if(input.position.length !== 0 && timestamp > 0) {
             const dataToSend = {
-                rating: parseInt(input.rating),
+                rating,
                 position: input.position,
                 comment: input.comment,
                 tag: input.tag,
@@ -93,11 +101,11 @@ export const ReviewsForm = () => {
                     <AllInputsContainer>
                         <SingleInputContainer>
                             <p>Stanowisko</p>
-                            <Input placeholder='eg. Intern' onChange={handleChange} name="position"/>
+                            <Input placeholder='eg. Intern' onChange={handleChange} name="position" autoComplete='off'/>
                         </SingleInputContainer>
                         <TagAndScoreContainer>
                             <div>
-                                <p>Technologia</p>
+                                <p style={{textAlign: 'center'}}>Technologia</p>
                                 <Select onChange={handleChange} name="tag">
                                     {tags.map(tag => (
                                         <option key={tag}>{tag}</option>
@@ -105,20 +113,24 @@ export const ReviewsForm = () => {
                                 </Select>
                             </div>
                             <div>
-                                <p>Ocena</p>
-                                <Select onChange={handleChange} name="rating">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </Select>
+                                <p style={{textAlign: 'center'}}>Ocena</p>
+                                <RatingStar
+                                    clickable
+                                    maxScore={5}
+                                    id="123"
+                                    rating={rating}
+                                    onRatingChange={onRatingChange}
+                                />
                             </div>
                         </TagAndScoreContainer>
                         <SingleInputContainer>
                             <p>Komentarz</p>
                             <TextArea placeholder='Co sądzisz o firmie?'  onChange={handleChange} name="comment"/>
                         </SingleInputContainer>
+                        <CurrentlyWorkingContainer>
+                            <input type='checkbox' id='currentlyWorking' onChange={() => setCurrentlyWorking(!currentlyWorking)}/>
+                            <label htmlFor='currentlyWorking'>Dalej pracuje</label>
+                        </CurrentlyWorkingContainer>
                         <DatesContainer>
                             <DateContainer>
                                 <p>Rozpoczęcie pracy</p>
@@ -126,7 +138,7 @@ export const ReviewsForm = () => {
                             </DateContainer>
                             <DateContainer>
                                 <p>Zakończenie pracy</p>
-                                <DatePicker className='date-picker' selected={endDate} onChange={(date:Date) => setEndDate(date)} />
+                                <DatePicker disabled={currentlyWorking} className='date-picker' selected={endDate} onChange={(date:Date) => setEndDate(date)} />
                             </DateContainer>
                         </DatesContainer>
                         <ButtonContainer>

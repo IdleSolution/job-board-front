@@ -17,9 +17,9 @@ export const CompanyCard: React.FC<IProps> = ({company}) => {
             <Container>
                 <Title>{company.name}</Title>
                 <Rating>
-                    <FontAwesomeIcon icon={faStar}/>
+                    <FontAwesomeIcon icon={faStar} style={{color: 'rgb(105, 131, 250)'}}/>
                     <p>{company.rating > 0 ? `${company.rating.toFixed(2)} / 5` : 'brak'}</p>
-                    <RatingNumber>{company.reviewCount} recenzji</RatingNumber>
+                    <RatingNumber>{company.reviewCount} {company.reviewCount === 1 ? 'recenzja' : 'recenzji'}</RatingNumber>
                 </Rating>
                 <Tags>
                     {company.tags.map(tag => (

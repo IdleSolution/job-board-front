@@ -3,12 +3,9 @@ import theme1 from '../../../common/colors';
 
 export const Container = styled.div`
     width: 100%;
-    background-color: #fff;
-    border-radius: 7px;
     padding: 2rem 0;
     position: relative;
     margin-bottom: 1rem;
-
 `
 
 export const RatingContainer = styled.div`
@@ -45,4 +42,10 @@ export const Date = styled.p`
 
 export const Description = styled.p`
     margin-bottom: 5rem;
+`
+
+export const Line = styled.div`
+  height: .05rem;
+  width: 100%;
+  background: rgb(196, 196, 196);
 `

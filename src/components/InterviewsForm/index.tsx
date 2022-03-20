@@ -1,13 +1,14 @@
 import {useParams} from "react-router-dom";
-import { Container, SingleInputContainer, Input, TagAndScoreContainer, AllInputsContainer,
-    Select, TextArea, DatesContainer, DateContainer, SubmitButton, ButtonContainer } from './style';
+import { Container, SingleInputContainer, TagAndScoreContainer, AllInputsContainer} from './style';
 import DatePicker from "react-datepicker";
+import { Input, TextArea, SubmitButton, ButtonContainer, Select } from './../ReviewsForm/style'
 import { useEffect, useState } from 'react';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import Spinner from "../Spinner";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import { RatingStar } from "rating-star";
 
 
 interface InputData {
@@ -23,6 +24,8 @@ export const InterviewsForm = () => {
 
     const [tags, setTags] = useState<string[]>([]);
     const [loading, setLoading] = useState(false);
+    const [rating, setRating] = useState<number>(1);
+
     const [input, setInput] = useState<InputData>({
         position: '',
         rating: '1',
@@ -48,12 +51,16 @@ export const InterviewsForm = () => {
         setInput(values => ({...values, [name]: value}))
     }
 
+    const onRatingChange = (score: any) => {
+        setRating(score);
+    };
+
     const onSubmit = async () => {
         setLoading(true);
 
         if(input.position.length !== 0) {
             const dataToSend = {
-                difficulty: parseInt(input.rating),
+                difficulty: rating,
                 position: input.position,
                 comment: input.comment,
                 tag: input.tag,
@@ -88,7 +95,7 @@ export const InterviewsForm = () => {
                     <AllInputsContainer>
                         <SingleInputContainer>
                             <p>Stanowisko</p>
-                            <Input placeholder='eg. Intern' onChange={handleChange} name="position"/>
+                            <Input placeholder='eg. Intern' onChange={handleChange} name="position" autoComplete='off'/>
                         </SingleInputContainer>
                         <TagAndScoreContainer>
                             <div>
@@ -100,17 +107,17 @@ export const InterviewsForm = () => {
                                 </Select>
                             </div>
                             <div>
-                                <p>Trudność</p>
-                                <Select onChange={handleChange} name="rating">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </Select>
+                                <p style={{textAlign: 'center'}}>Ocena</p>
+                                <RatingStar
+                                    clickable
+                                    maxScore={5}
+                                    id="123"
+                                    rating={rating}
+                                    onRatingChange={onRatingChange}
+                                />
                             </div>
                         </TagAndScoreContainer>
-                        <SingleInputContainer>
+                        <SingleInputContainer style={{marginBottom: '2rem'}}>
                             <p>Komentarz</p>
                             <TextArea placeholder='Opisz proces rekrutacji, możliwe pytania etc.'  onChange={handleChange} name="comment"/>
                         </SingleInputContainer>

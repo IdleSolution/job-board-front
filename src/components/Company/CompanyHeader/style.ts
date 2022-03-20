@@ -39,7 +39,12 @@ export const NavbarItem = styled.div<IProps>`
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid #dcdee0;
+  
+    :first-of-type {
+      border-right: 1px solid #dcdee0;
+    }
+
+
     border-bottom: 3px solid ${props => props.active ? `${theme.light}` : 'transparent'};
     width: 7rem;
 
@@ -107,15 +112,14 @@ export const ButtonsContainer = styled.div`
 `
 
 export const Button = styled.button`
-    background-color: ${theme.dark};
+    background-color: rgb(230, 53, 196);
     color: #fff;
     text-decoration: none;
     display: inline-block;
     padding: .6rem 1rem;
-    border: none;
     font-size: 1rem;
     cursor: pointer;
-    border: 1px solid #000;
+    border: 1px solid #fff;
     border-radius: 5px;
     margin-right: 1rem;
 `

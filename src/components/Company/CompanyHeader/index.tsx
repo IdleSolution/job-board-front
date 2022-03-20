@@ -24,7 +24,7 @@ export const CompanyHeader: React.FC<IProps> = ({company, setPage}) => {
                 <NameRating>
                     <h1>{company.name}</h1>
                     <RatingContainer>
-                        <FontAwesomeIcon icon={faStar} style={{marginRight: '.2rem' }}/>
+                        <FontAwesomeIcon icon={faStar} style={{marginRight: '.2rem', color: 'rgb(105, 131, 250)' }}/>
                         <p>{company.rating > 0 ? `${company.rating.toFixed(2)} / 5` : 'brak'}</p>
                     </RatingContainer>
                 </NameRating>
