@@ -3,4 +3,5 @@ export interface IInterview {
     position: string,
     comment: string,
     issued: string,
+    tag: string,
 }

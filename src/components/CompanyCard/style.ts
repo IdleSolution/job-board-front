@@ -43,7 +43,6 @@ export const Tags = styled.div`
 export const Tag = styled.div`
     background-color: rgb(105, 131, 250);
     color: #fff;
-    padding: .5rem;
     border-radius: 100px;
     margin-right: .6rem;
     padding: .5rem 1rem;
