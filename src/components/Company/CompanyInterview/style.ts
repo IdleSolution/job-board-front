@@ -45,7 +45,7 @@ export const Description = styled.p`
 `
 
 export const Line = styled.div`
-  height: .05rem;
+  height: .07rem;
   width: 100%;
   background: rgb(196, 196, 196);
 `

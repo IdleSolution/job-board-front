@@ -16,6 +16,7 @@ interface InputData {
     rating: string;
     comment: string;
     tag: string;
+    IsStillWorking: boolean;
 }
 
 export const ReviewsForm = () => {
@@ -32,7 +33,8 @@ export const ReviewsForm = () => {
         position: '',
         rating: '1',
         comment: '',
-        tag: ''
+        tag: '',
+        IsStillWorking: false,
     });
 
     const onRatingChange = (score: any) => {
@@ -63,7 +65,7 @@ export const ReviewsForm = () => {
 
         // @ts-ignore
         const timestamp = endDate - startDate;
-        if(input.position.length !== 0 && timestamp > 0) {
+        if(input.position.length !== 0 && (timestamp > 0 || !endDate)) {
             const dataToSend = {
                 rating,
                 position: input.position,
@@ -72,6 +74,7 @@ export const ReviewsForm = () => {
                 from: startDate,
                 to: endDate,
                 issued: new Date(),
+                isStillWorking: currentlyWorking,
             }
 
             try {

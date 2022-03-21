@@ -2,6 +2,7 @@ import { Container, RatingContainer, NameRating, Content, WorkPeriod, Date, Desc
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IInterview } from "../../../common/interfaces/Interview.interface";
+import { DateTime } from 'luxon';
 import { Tag } from "../../CompanyCard/style";
 
 interface IProps {
@@ -10,7 +11,7 @@ interface IProps {
 
 export const CompanyInterview: React.FC<IProps> = ({interview}) => {
     // @ts-ignore
-    const d = new window.Date(interview.issued).toDateString();
+    let d = DateTime.fromISO(interview.issued).setLocale('pl').toFormat('dd MMMM yyyy')
 
     return (
     <>
