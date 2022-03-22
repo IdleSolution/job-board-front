@@ -78,10 +78,12 @@ export const ReviewsForm = () => {
             }
 
             try {
-                await axios.post(`https://localhost:5001/api/Reviews/${name}`, dataToSend);
+                const x = await axios.post(`https://localhost:5001/api/Reviews/${name}/`, dataToSend, {withCredentials: true});
+                console.log(x);
                 notify("Dodano recenzję!");
                 navigate(`/company/${name}`, { replace: true });
             } catch(e: any) {
+                console.log(e.response);
                 notify(e.response.data);
                 setLoading(false);
             }
