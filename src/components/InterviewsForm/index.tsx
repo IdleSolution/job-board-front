@@ -68,7 +68,7 @@ export const InterviewsForm = () => {
             }
 
             try {
-                await axios.post(`https://localhost:5001/api/Interviews/${name}`, dataToSend);
+                await axios.post(`https://localhost:5001/api/Interviews/${name}`, dataToSend, {withCredentials: true});
                 notify("Dodano proces rekrutacji!");
                 setLoading(false);
                 navigate(`/company/${name}`, { replace: true });
