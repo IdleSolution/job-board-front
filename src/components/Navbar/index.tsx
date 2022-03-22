@@ -8,8 +8,8 @@ export const Navbar = () => (
         <Container>
             <Link to='/'><h1>Staże Dla Studentów</h1></Link>
             <UserButtons>
-                <UserButton>Zaloguj</UserButton>
-                <UserButton>Zarejestruj</UserButton>
+                <UserButton><Link to='login'>Zaloguj</Link></UserButton>
+                <UserButton><Link to='register'>Zarejestruj</Link> </UserButton>
             </UserButtons>
         </Container>
         {/*<NavigationContainer>*/}

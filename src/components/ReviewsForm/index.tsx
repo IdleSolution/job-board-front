@@ -65,6 +65,9 @@ export const ReviewsForm = () => {
 
         // @ts-ignore
         const timestamp = endDate - startDate;
+        // @ts-ignore
+        const email = await axios.get("https://localhost:5001/api/User", {withCredentials: true}).then(res => res.data.email);
+
         if(input.position.length !== 0 && (timestamp > 0 || !endDate)) {
             const dataToSend = {
                 rating,
@@ -75,6 +78,7 @@ export const ReviewsForm = () => {
                 to: endDate,
                 issued: new Date(),
                 isStillWorking: currentlyWorking,
+                CreatorEmail: email,
             }
 
             try {

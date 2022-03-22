@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import { InterviewsForm } from './components/InterviewsForm';
 import { Login } from './components/Login';
+import {Register} from "./components/Register";
 
 
 
@@ -24,6 +25,7 @@ function App() {
             <Route path='company/:name/review' element={<ReviewsForm />}/>
             <Route path='company/:name/interview' element={<InterviewsForm />}/>
             <Route path='login' element={<Login />}/>
+            <Route path='register' element={<Register />}/>
         </Routes>
       </BrowserRouter>
       <ToastContainer style={{fontSize: '1.2rem'}}/>
