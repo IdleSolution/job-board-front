@@ -1,19 +1,22 @@
 import axios from "axios";
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {UserContext} from "../../context/LoginContext";
+
 
 export const Login = () => {
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
+    const [user, setUser] = useContext(UserContext);
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
+
     const onLogin = async (e: any) => {
         e.preventDefault();
-        console.log(login);
-        console.log(password);
-        const res = await axios.post('http://localhost:5000/api/User/login', {
+        await axios.post('http://localhost:5000/api/User/login', {
             email: login,
             password: password
-        }, {withCredentials: true})
-        console.log(res);
-        console.log('logged in...')
+        }, {withCredentials: true});
+
+        //@ts-ignore
+        setUser(login);
     }
 
     const onLoginChange = (e: any) => {

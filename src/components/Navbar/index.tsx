@@ -2,32 +2,26 @@ import { Container, UserButtons, UserButton } from './style'
 import { faBuilding, faStickyNote } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom';
+import {useContext} from "react";
+import {UserContext} from "../../context/LoginContext";
 
-export const Navbar = () => (
-    <div>
-        <Container>
-            <Link to='/'><h1>Staże Dla Studentów</h1></Link>
-            <UserButtons>
-                <UserButton>Zaloguj</UserButton>
-                <UserButton>Zarejestruj</UserButton>
-            </UserButtons>
-        </Container>
-        {/*<NavigationContainer>*/}
-        {/*    <NavigationGroup>*/}
-        {/*        <SingleNavigationActive>*/}
-        {/*            <FontAwesomeIcon icon={faBuilding}/>*/}
-        {/*            <Link to='/'><p>Firmy</p></Link>*/}
-        {/*        </SingleNavigationActive>*/}
+export const Navbar = () => {
+    const [user] = useContext(UserContext);
 
-        {/*        <SingleNavigation>*/}
-        {/*            <FontAwesomeIcon icon={faStickyNote}/>*/}
-        {/*            <p>Pytania Rekrutacyjne</p>*/}
-        {/*        </SingleNavigation>*/}
+    return (
+        <div>
+            <Container>
+                <Link to='/'><h1>Staże Dla Studentów</h1></Link>
+                {user ? (
+                    <p>Hello {user}</p>
+                ) : (
+                    <UserButtons>
+                        <Link to='/login'><UserButton>Zaloguj</UserButton></Link>
+                        <UserButton>Zarejestruj</UserButton>
+                    </UserButtons>
+                )}
+            </Container>
+        </div>
+    )
 
-        {/*    </NavigationGroup>*/}
-        {/*    /!*<ButtonCreateReview>Stwórz nową recenzje</ButtonCreateReview>*!/*/}
-        {/*    <div />*/}
-        {/*</NavigationContainer>*/}
-    </div>
-
-)
+}

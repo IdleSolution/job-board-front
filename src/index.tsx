@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import LoginContext from "./context/LoginContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <LoginContext subPages ={(<App />)} />
   </React.StrictMode>,
   document.getElementById('root')
 );

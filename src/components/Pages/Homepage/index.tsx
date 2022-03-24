@@ -19,7 +19,7 @@ export const Homepage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get('https://localhost:5001/api/Companies');
+        const res = await axios.get('http://localhost:5000/api/Companies');
         const companiesData: ICompanyPreview[] = res.data;
         setCompanies(companiesData);
         setCompaniesFiltered(companiesData);

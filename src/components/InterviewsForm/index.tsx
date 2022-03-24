@@ -35,7 +35,7 @@ export const InterviewsForm = () => {
 
     useEffect(() => {
         (async () => {
-            const res = await axios.get('https://localhost:5001/api/Tags');
+            const res = await axios.get('http://localhost:5000/api/Tags');
             const data: string[] = res.data;
 
             setTags(data);
@@ -68,7 +68,7 @@ export const InterviewsForm = () => {
             }
 
             try {
-                await axios.post(`https://localhost:5001/api/Interviews/${name}`, dataToSend, {withCredentials: true});
+                await axios.post(`http://localhost:5000/api/Interviews/${name}`, dataToSend, {withCredentials: true});
                 notify("Dodano proces rekrutacji!");
                 setLoading(false);
                 navigate(`/company/${name}`, { replace: true });

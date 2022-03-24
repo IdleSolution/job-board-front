@@ -44,7 +44,7 @@ export const ReviewsForm = () => {
 
     useEffect(() => {
         (async () => {
-            const res = await axios.get('https://localhost:5001/api/Tags');
+            const res = await axios.get('http://localhost:5000/api/Tags');
             const data: string[] = res.data;
 
             setTags(data);
@@ -75,10 +75,11 @@ export const ReviewsForm = () => {
                 to: endDate,
                 issued: new Date(),
                 isStillWorking: currentlyWorking,
+                CreatorEmail: 'idlesoluszyn1@gmail.com'
             }
 
             try {
-                const x = await axios.post(`https://localhost:5001/api/Reviews/${name}/`, dataToSend, {withCredentials: true});
+                const x = await axios.post(`http://localhost:5000/api/Reviews/${name}/`, dataToSend, {withCredentials: true});
                 console.log(x);
                 notify("Dodano recenzję!");
                 navigate(`/company/${name}`, { replace: true });
