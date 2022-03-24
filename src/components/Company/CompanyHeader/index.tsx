@@ -2,8 +2,9 @@ import { Container, Navbar, NavbarItem, NavbarItemActive, RatingContainer, Secti
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ICompanyPreview } from "../../../common/interfaces/CompanyPreview.interface";
-import { useState } from "react";
+import {useContext, useState} from "react";
 import {Link} from "react-router-dom";
+import {UserContext} from "../../../context/LoginContext";
 
 interface IProps {
     company: ICompanyPreview,
@@ -12,6 +13,7 @@ interface IProps {
 
 export const CompanyHeader: React.FC<IProps> = ({company, setPage}) => {
     const [currentPage, setCurrentPage] = useState<'reviews' | 'interviews'>('reviews');
+    const [user, setUser] = useContext(UserContext);
 
     const clicked = (page: 'reviews' | 'interviews') => {
         setCurrentPage(page);
@@ -37,10 +39,12 @@ export const CompanyHeader: React.FC<IProps> = ({company, setPage}) => {
                             <p>{company.interviewCount}</p>
                             <p>Pytań</p>
                         </NavbarItem>
-                        <ButtonsContainer>
-                            <Button><Link to={`/company/${company.name}/review`}>Stwórz recenzję</Link></Button>
-                            <Button><Link to={`/company/${company.name}/interview`}>Stwórz Pytania</Link></Button>
-                        </ButtonsContainer> 
+                        {user ? (
+                            <ButtonsContainer>
+                                <Button><Link to={`/company/${company.name}/review`}>Stwórz recenzję</Link></Button>
+                                <Button><Link to={`/company/${company.name}/interview`}>Stwórz Pytania</Link></Button>
+                            </ButtonsContainer>
+                        ) : null}
                 </Navbar>
             </Section>
 

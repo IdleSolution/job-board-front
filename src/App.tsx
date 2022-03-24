@@ -11,6 +11,8 @@ import { InterviewsForm } from './components/InterviewsForm';
 import { Login } from './components/Login';
 import {UserContext} from "./context/LoginContext";
 import axios from "axios";
+import {Register} from "./components/Register";
+import {PrivateRoute} from "./common/PrivateRoute";
 
 
 
@@ -25,22 +27,22 @@ function App() {
         })();
     }, []);
 
-
-    return (
-      <div>
-        <BrowserRouter>
-          <Navbar />
-          <Routes>
-              <Route path='/' element={<Homepage />}/>
-              <Route path='company/:name' element={<Company />}/>
-              <Route path='company/:name/review' element={<ReviewsForm />}/>
-              <Route path='company/:name/interview' element={<InterviewsForm />}/>
-              <Route path='login' element={<Login />}/>
-          </Routes>
-        </BrowserRouter>
-        <ToastContainer style={{fontSize: '1.2rem'}}/>
-      </div>
-    );
+      return (
+        <div>
+          <BrowserRouter>
+            <Navbar />
+            <Routes>
+                <Route path='/' element={<Homepage />}/>
+                <Route path='company/:name' element={<Company />}/>
+                <Route path='company/:name/review' element={<PrivateRoute component={<ReviewsForm />}/>}/>
+                <Route path='company/:name/interview' element={<PrivateRoute component={<InterviewsForm />}/>}/>
+                <Route path='login' element={<Login />}/>
+                <Route path='register' element={<Register />}/>
+            </Routes>
+          </BrowserRouter>
+          <ToastContainer style={{fontSize: '1.2rem'}}/>
+        </div>
+      );
 }
 
 export default App;

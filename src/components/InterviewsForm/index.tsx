@@ -58,6 +58,8 @@ export const InterviewsForm = () => {
     const onSubmit = async () => {
         setLoading(true);
 
+        const email = await axios.get("https://localhost:5001/api/User", {withCredentials: true}).then(res => res.data.email);
+
         if(input.position.length !== 0) {
             const dataToSend = {
                 difficulty: rating,
@@ -65,6 +67,7 @@ export const InterviewsForm = () => {
                 comment: input.comment,
                 tag: input.tag,
                 issued: new Date(),
+                CreatorEmail: email,
             }
 
             try {

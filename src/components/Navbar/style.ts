@@ -1,10 +1,11 @@
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import theme from './../../common/colors';
 
 export const Container = styled.div`
+  position: relative;
   width: 100%;
   height: 1rem;
-  background-image: linear-gradient(to right, rgb(101, 133, 252) , rgb(230, 53, 196));
+  background: linear-gradient(to right, rgb(101, 133, 252) , rgb(230, 53, 196));
 
   display: flex;
   align-items: center;
@@ -24,6 +25,11 @@ export const Container = styled.div`
 export const UserButtons = styled.div`
   margin-right: 2rem;
   display: flex;
+  
+  p {
+    cursor: pointer;
+  }
+  z-index: 2;
 `
 
 export const UserButton = styled.div`
@@ -32,64 +38,36 @@ export const UserButton = styled.div`
   border: 1px solid rgb(232, 136, 124);
   margin: 0 .5rem;
   cursor: pointer;
+  z-index: 1000000;
+
+
+`
+
+export const UserOptions = styled.div`
+  position: absolute;
+  right: 0;
+  width: 15%;
+  bottom: 0;
+  transition: z-index .5s step-end, transform .5s;
+  margin-right: 1.5%;
+  border: 1px solid rgb(196, 196, 196);
+  border-top: 0;
+  cursor: pointer;
+
+
+  div {
+    border-bottom: 1px solid rgb(196, 196, 196);
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    
+    p {
+      margin-left: 1rem;
+    }
+  }
   
-`
-
-export const NavigationContainer = styled.div`
-    width: 100%;
-    height: .5rem;
-    background-color: ${theme.dark};
-    padding: 2rem 0;
-    border-bottom: 1px solid #000;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-
-`
-
-export const NavigationGroup = styled.div`
-    display: flex;
-    align-items: center;
-
-`
-
-export const SingleNavigation = styled.div`
-    display: flex;
-    align-items: center;
-    color: #fff;
-    font-size: 1.4rem;
-    margin: 0 1rem;
-    cursor: pointer;
-
-    p {
-        margin-left: .5rem;
-    }
-
-`
-
-export const SingleNavigationActive = styled.div`
-    display: flex;
-    align-items: center;
-    color: #fff;
-    font-size: 1.4rem;
-    margin: 0 1rem;
-    cursor: pointer;
-
-    p {
-        margin-left: .5rem;
-    }
-    border-bottom: 1px solid #fff;
-`
-
-export const ButtonCreateReview = styled.button`
-    background-color: ${theme.light};
-    color: #fff;
-    text-decoration: none;
-    display: inline-block;
-    padding: .6rem 1rem;
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
-    border: 1px solid #000;
-    border-radius: 5px;
+  div:last-of-type {
+    border-bottom: none;
+  }
 `
