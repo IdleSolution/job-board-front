@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IInterview } from "../../../common/interfaces/Interview.interface";
 import { DateTime } from 'luxon';
 import { Tag } from "../../CompanyCard/style";
+import {Comments} from "../Comments";
 
 interface IProps {
     interview: IInterview,
@@ -28,6 +29,8 @@ export const CompanyInterview: React.FC<IProps> = ({interview}) => {
                 <Description>{interview.comment}</Description>
                 <Date>{d}</Date>
             </Content>
+            <Comments id={interview.id} type={'interview'}/>
+
         </Container>
         <Line />
     </>

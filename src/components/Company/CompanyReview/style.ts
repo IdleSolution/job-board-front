@@ -8,7 +8,7 @@ export const Container = styled.div`
     padding: 2rem 0;
     position: relative;
     margin-bottom: 1rem;
-
+    display: flex;
 `
 
 export const RatingContainer = styled.div`

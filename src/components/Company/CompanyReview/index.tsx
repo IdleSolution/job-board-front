@@ -5,6 +5,7 @@ import { IReview } from "../../../common/interfaces/Review.interface";
 import {Line} from "../CompanyInterview/style";
 import {DateTime} from 'luxon'
 import { Tag } from "../../CompanyCard/style";
+import {Comments} from "../Comments";
 
 interface IProps {
     review: IReview
@@ -34,6 +35,7 @@ export const CompanyReview: React.FC<IProps> = ({review}) => {
                     <Description>{review.comment}</Description>
                     <Date>{d}</Date>
                 </Content>
+                <Comments id={review.id} type={'review'}/>
             </Container>
             <Line />
         </>
