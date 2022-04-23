@@ -5,4 +5,5 @@ export interface IInterview {
     comment: string,
     issued: string,
     tag: string,
+    creatorEmail: string,
 }

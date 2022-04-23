@@ -14,8 +14,8 @@ import Spinner from "../../Spinner";
 
 export const Company = (props: any) => {
     const [company, setCompany] = useState<ICompanyPreview>();
-    const [reviews, setReviews] = useState<IReview[]>();
-    const [interviews, setInterviews] = useState<IInterview[]>();
+    const [reviews, setReviews] = useState<IReview[]>([]);
+    const [interviews, setInterviews] = useState<IInterview[]>([]);
     const [page, setPage] = useState<'reviews' | 'interviews'>('reviews');
 
     const { name } = useParams();
@@ -33,16 +33,30 @@ export const Company = (props: any) => {
           })();
     }, [])
 
+    const removeReview = async (id: number) => {
+        const newReviews = reviews.filter(x => x.id !== id);
+        setReviews(newReviews);
+        await axios.delete(`http://localhost:5000/api/Reviews/${id}`, { withCredentials: true });
+
+    }
+
+    const removeInterview = async (id: number) => {
+        const newInterviews = interviews.filter(x => x.id !== id);
+        setInterviews(newInterviews);
+        await axios.delete(`http://localhost:5000/api/Interviews/${id}`, { withCredentials: true });
+
+    }
+
     return (
         <>
         {company && reviews && interviews ? (
             <Container>
                 <CompanyHeader company={company} setPage={setPage}/>
                 {page === 'reviews' && reviews.map(review => (
-                    <CompanyReview review={review}/>
+                    <CompanyReview review={review} removeReview={removeReview}/>
                 ))}
                 {page === 'interviews' && interviews.map(interview => (
-                    <CompanyInterview interview={interview}/>
+                    <CompanyInterview interview={interview} removeInterview={removeInterview}/>
                 ))}
             </Container>
             ) : (<div style={{width: '100%', display: 'flex', justifyContent: 'center', marginTop: '10rem'}}><Spinner /></div>)

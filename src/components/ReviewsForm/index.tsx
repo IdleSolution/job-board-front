@@ -66,7 +66,7 @@ export const ReviewsForm = () => {
         // @ts-ignore
         const timestamp = endDate - startDate;
         // @ts-ignore
-        const email = await axios.get("https://localhost:5001/api/User", {withCredentials: true}).then(res => res.data.email);
+        const email = await axios.get("http://localhost:5000/api/User", {withCredentials: true}).then(res => res.data.email);
 
         if(input.position.length !== 0 && (timestamp > 0 || !endDate)) {
             const dataToSend = {
@@ -83,18 +83,20 @@ export const ReviewsForm = () => {
 
             try {
                 const x = await axios.post(`http://localhost:5000/api/Reviews/${name}/`, dataToSend, {withCredentials: true});
-                console.log(x);
                 notify("Dodano recenzję!");
                 navigate(`/company/${name}`, { replace: true });
             } catch(e: any) {
                 console.log(e.response);
                 notify(e.response.data);
                 setLoading(false);
+            } finally {
+                setLoading(false);
             }
         } else {
             notify("Błąd w podanych danych");
+            setLoading(false);
+
         }
-        setLoading(false);
 
     }
 

@@ -50,6 +50,12 @@ export const Comments: React.FC<IProps> = ({id, type}) => {
         setCommentContent('');
     }
 
+    const onDelete = async (id: number) => {
+        const newComments = comments.filter(x => x.id !== id);
+        setComments(newComments);
+        await axios.delete(`http://localhost:5000/api/${endpoint}/${id}`, { withCredentials: true });
+    }
+
     return (
         <Container>
             <CommentsContainer>
@@ -63,6 +69,9 @@ export const Comments: React.FC<IProps> = ({id, type}) => {
                         <CommentInformation>
                             <p>{comment.creatorEmail}</p>
                             <p>{DateTime.fromISO(comment.issued).setLocale('pl').toFormat('dd MMMM yyyy hh:mm:ss')}</p>
+                            {comment.creatorEmail === user && (
+                                <p onClick={() => onDelete(comment.id)} style={{color: 'rgb(105,131,250)', cursor: 'pointer'}}>Usuń</p>
+                            )}
                         </CommentInformation>
                         <CommentContent>{comment.message}</CommentContent>
                     </SingleCommentContainer>

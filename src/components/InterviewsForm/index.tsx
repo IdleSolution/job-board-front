@@ -58,7 +58,7 @@ export const InterviewsForm = () => {
     const onSubmit = async () => {
         setLoading(true);
 
-        const email = await axios.get("https://localhost:5001/api/User", {withCredentials: true}).then(res => res.data.email);
+        const email = await axios.get("http://localhost:5000/api/User", {withCredentials: true}).then(res => res.data.email);
 
         if(input.position.length !== 0) {
             const dataToSend = {

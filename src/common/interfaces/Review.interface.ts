@@ -8,4 +8,5 @@ export interface IReview {
     issued: string,
     tag: string,
     isStillWorking: boolean,
+    creatorEmail: string,
 }

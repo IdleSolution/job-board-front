@@ -40,11 +40,21 @@ export const WorkPeriod = styled.p`
 
 `
 
-export const Date = styled.p`
+export const FooterContainer = styled.div`
     position: absolute;
     bottom: 0;
+    display: flex;
 `
 
 export const Description = styled.p`
     margin-bottom: 5rem;
+`
+
+export const OwnActions = styled.div`
+  display: flex;
+  p {
+    margin-left: 1rem; 
+    color: rgb(105,131,250);
+    cursor: pointer;
+  }
 `

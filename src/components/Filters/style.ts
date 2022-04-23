@@ -62,7 +62,6 @@ export const Tags = styled.div`
 export const TagsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 
   div {
     font-size: 1rem;

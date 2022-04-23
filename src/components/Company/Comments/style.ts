@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 40%;
-  height: 18rem;
+  width: 35%;
+  height: 15rem;
 `
 
 export const Input = styled.div`
-  border: 1px solid rgb(196, 196, 196);
+  border-top: 1px solid rgb(196, 196, 196);
   position: relative;
   padding: 1rem;
   display: flex;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-bottomright: 5px;
+  
   p {
         font-size: .8rem;
         font-weight: 0;
@@ -25,7 +28,8 @@ export const Input = styled.div`
       border: 1px solid rgb(196, 196, 196);
       border-radius: 20px;
       resize: none;
-      background: rgba(241, 241, 242);
+      background: rgba(250, 250, 250);
+      font-size: .6rem;
 
     }
 
@@ -42,16 +46,18 @@ export const Input = styled.div`
 export const CommentsContainer = styled.div`
   width: 100%;
   height: 70%;
-  background: rgba(241, 241, 242);
+  background: rgba(250, 250, 250);
   padding-top: 1rem;
   overflow-y: scroll;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
 
   ::-webkit-scrollbar {
     width: 5px;
   }
 
   ::-webkit-scrollbar-track {
-    background-color: darkgrey;
+    background-color: rgba(230, 230, 230);
   }
 
   ::-webkit-scrollbar-thumb {
@@ -67,7 +73,7 @@ export const SingleCommentContainer = styled.div`
 
 export const CommentInformation = styled.div`
   display: flex;
-  
+  color: gray;
   p {
     margin-right: 1rem;
   }
