@@ -6,4 +6,5 @@ export interface IInterview {
     issued: string,
     tag: string,
     creatorEmail: string,
+    type?: string,
 }

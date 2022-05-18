@@ -1,14 +1,16 @@
 import {useParams} from "react-router-dom";
-import { Container, SingleInputContainer, Input, TagAndScoreContainer, AllInputsContainer,
-    Select, TextArea, DatesContainer, DateContainer, SubmitButton, ButtonContainer, CurrentlyWorkingContainer } from './style';
+import { Container, SingleInputContainer, TagAndScoreContainer, AllInputsContainer} from './../style';
 import DatePicker from "react-datepicker";
+import { Input, TextArea, SubmitButton, ButtonContainer, Select } from './../../ReviewsForm/style'
 import { useEffect, useState } from 'react';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-import Spinner from "../Spinner";
+import Spinner from "../../Spinner";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { RatingStar } from "rating-star";
+import { IInterview } from "../../../common/interfaces/Interview.interface";
+import { useLocation } from 'react-router-dom'
 
 
 interface InputData {
@@ -16,31 +18,27 @@ interface InputData {
     rating: string;
     comment: string;
     tag: string;
-    IsStillWorking: boolean;
 }
 
-export const ReviewsForm = () => {
+type LocationState = { interview: IInterview; };
+
+export const InterviewsEditForm = () => {
     const { name } = useParams();
     const navigate = useNavigate();
+    const location = useLocation()
+    const { interview } = location.state as LocationState
 
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState<Date | null>(null);
+
     const [tags, setTags] = useState<string[]>([]);
-    const [rating, setRating] = useState<number>(1);
     const [loading, setLoading] = useState(false);
-    const [currentlyWorking, setCurrentlyWorking] = useState(false);
-    const [input, setInput] = useState<InputData>({
-        position: '',
-        rating: '1',
-        comment: '',
-        tag: '',
-        IsStillWorking: false,
-    });
+    const [rating, setRating] = useState<number>(1);
 
-    const onRatingChange = (score: any) => {
-        setRating(score);
-        setEndDate(null);
-    };
+    const [input, setInput] = useState<InputData>({
+        position: interview ? interview.position : '',
+        rating: interview ? String(interview.difficulty) : '1',
+        comment: interview ? interview.comment : '',
+        tag: interview ? interview.tag : ''
+    });
 
     useEffect(() => {
         (async () => {
@@ -60,42 +58,39 @@ export const ReviewsForm = () => {
         setInput(values => ({...values, [name]: value}))
     }
 
+    const onRatingChange = (score: any) => {
+        setRating(score);
+    };
+
     const onSubmit = async () => {
         setLoading(true);
 
-        // @ts-ignore
-        const timestamp = endDate - startDate;
-        // @ts-ignore
         const email = await axios.get("http://localhost:5000/api/User", {withCredentials: true}).then(res => res.data.email);
 
-        if(input.position.length !== 0 && (timestamp > 0 || !endDate)) {
+        if(input.position.length !== 0) {
             const dataToSend = {
-                rating,
+                difficulty: rating,
                 position: input.position,
                 comment: input.comment,
                 tag: input.tag,
-                from: startDate,
-                to: endDate,
                 issued: new Date(),
-                isStillWorking: currentlyWorking,
                 CreatorEmail: email,
             }
 
             try {
-                const x = await axios.post(`http://localhost:5000/api/Reviews/${name}/`, dataToSend, {withCredentials: true});
-                notify("Dodano recenzję!");
+                await axios.put(`http://localhost:5000/api/Interviews/${interview.id}`, dataToSend, {withCredentials: true});
+                notify("Dodano proces rekrutacji!");
+                setLoading(false);
                 navigate(`/company/${name}`, { replace: true });
             } catch(e: any) {
-                console.log(e.response);
                 notify(e.response.data);
-                setLoading(false);
-            } finally {
                 setLoading(false);
             }
         } else {
             notify("Błąd w podanych danych");
-            setLoading(false);
         }
+        setLoading(false);
+
     }
 
     return (
@@ -106,50 +101,34 @@ export const ReviewsForm = () => {
                 </div>
             ) : (
                 <>
-                    <h2 style={{textAlign: 'center'}}>Stwórz recenzję dla {name}</h2>
+                    <h2 style={{textAlign: 'center'}}>Edytuj swój opis rekrutacji dla {name}</h2>
                     <AllInputsContainer>
                         <SingleInputContainer>
                             <p>Stanowisko</p>
-                            <Input placeholder='eg. Intern' onChange={handleChange} name="position" autoComplete='off'/>
+                            <Input placeholder='eg. Intern' onChange={handleChange} name="position" autoComplete='off' value={interview.position} disabled/>
                         </SingleInputContainer>
                         <TagAndScoreContainer>
                             <div>
-                                <p style={{textAlign: 'center'}}>Technologia</p>
-                                <Select onChange={handleChange} name="tag">
+                                <p>Technologia</p>
+                                <Select onChange={handleChange} name="tag" disabled>
                                     {tags.map(tag => (
-                                        <option key={tag}>{tag}</option>
+                                        <option key={tag} selected={tag === interview.tag}>{tag}</option>
                                     ))}
                                 </Select>
                             </div>
                             <div>
                                 <p style={{textAlign: 'center'}}>Ocena</p>
                                 <RatingStar
-                                    clickable
                                     maxScore={5}
                                     id="123"
-                                    rating={rating}
-                                    onRatingChange={onRatingChange}
+                                    rating={interview.difficulty}
                                 />
                             </div>
                         </TagAndScoreContainer>
-                        <SingleInputContainer>
+                        <SingleInputContainer style={{marginBottom: '2rem'}}>
                             <p>Komentarz</p>
-                            <TextArea placeholder='Co sądzisz o firmie?'  onChange={handleChange} name="comment"/>
+                            <TextArea placeholder='Opisz proces rekrutacji, możliwe pytania etc.'  onChange={handleChange} name="comment" value={input.comment}/>
                         </SingleInputContainer>
-                        <CurrentlyWorkingContainer>
-                            <input type='checkbox' id='currentlyWorking' onChange={() => setCurrentlyWorking(!currentlyWorking)}/>
-                            <label htmlFor='currentlyWorking'>Dalej pracuje</label>
-                        </CurrentlyWorkingContainer>
-                        <DatesContainer>
-                            <DateContainer>
-                                <p>Rozpoczęcie pracy</p>
-                                <DatePicker className='date-picker' selected={startDate} onChange={(date:Date) => setStartDate(date)} />
-                            </DateContainer>
-                            <DateContainer>
-                                <p>Zakończenie pracy</p>
-                                <DatePicker disabled={currentlyWorking} className='date-picker' selected={endDate} onChange={(date:Date) => setEndDate(date)} />
-                            </DateContainer>
-                        </DatesContainer>
                         <ButtonContainer>
                             <SubmitButton onClick={() => onSubmit()}>Stwórz</SubmitButton>
                         </ButtonContainer>

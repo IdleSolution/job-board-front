@@ -8,6 +8,7 @@ import {Comments} from "../Comments";
 import {useContext} from "react";
 import {UserContext} from "../../../context/LoginContext";
 import {FooterContainer, OwnActions} from "../CompanyReview/style";
+import {Link} from "react-router-dom";
 
 interface IProps {
     interview: IInterview,
@@ -38,7 +39,7 @@ export const CompanyInterview: React.FC<IProps> = ({interview, removeInterview})
                     {user === interview.creatorEmail && (
                         <OwnActions>
                             <p onClick={() => removeInterview(interview.id)}>Usuń</p>
-                            <p>Edytuj</p>
+                            <Link to={`interview/edit`} state={{interview: interview}}><p>Edytuj</p></Link>
                         </OwnActions>
                     )}
                 </FooterContainer>

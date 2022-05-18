@@ -53,7 +53,7 @@ export const Company = (props: any) => {
             <Container>
                 <CompanyHeader company={company} setPage={setPage}/>
                 {page === 'reviews' && reviews.map(review => (
-                    <CompanyReview review={review} removeReview={removeReview}/>
+                    <CompanyReview review={review} removeReview={removeReview} companyName={company.name}/>
                 ))}
                 {page === 'interviews' && interviews.map(interview => (
                     <CompanyInterview interview={interview} removeInterview={removeInterview}/>

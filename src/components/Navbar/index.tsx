@@ -38,9 +38,9 @@ export const Navbar = () => {
                     </UserButtons>
                 )}
                 <UserOptions style={showUserOptions ? {transform: 'translateY(100%)', zIndex: '100', transition: 'z-index .5s step-end, transform .5s'} : {transform: 'translateY(0)', zIndex: '-1',  transition: 'z-index .5s step-start, transform .5s'}}>
-                    <div>
+                    <Link to={`/profile/${user}`}><div>
                         <p>Profil</p>
-                    </div>
+                    </div></Link>
                     <div onClick={() => onLogout()}>
                         <p>Wyloguj</p>
                     </div>

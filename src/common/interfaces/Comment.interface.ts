@@ -3,4 +3,5 @@ export interface IComment {
     message: string;
     issued: string;
     creatorEmail: string;
+    type?: string;
 }

@@ -8,13 +8,15 @@ import { Tag } from "../../CompanyCard/style";
 import {Comments} from "../Comments";
 import {useContext} from "react";
 import {UserContext} from "../../../context/LoginContext";
+import {Link} from "react-router-dom";
 
 interface IProps {
     review: IReview,
     removeReview: (id: number) => void;
+    companyName: string;
 }
 
-export const CompanyReview: React.FC<IProps> = ({review, removeReview}) => {
+export const CompanyReview: React.FC<IProps> = ({review, removeReview, companyName}) => {
     // @ts-ignore
     let d = DateTime.fromISO(review.issued).setLocale('pl').toFormat('dd MMMM yyyy')
     const period = review.isStillWorking ? 'Dalej pracuje' : ((review.from && review.to) ?
@@ -48,7 +50,7 @@ export const CompanyReview: React.FC<IProps> = ({review, removeReview}) => {
                         {user === review.creatorEmail && (
                             <OwnActions>
                                 <p onClick={() => removeReview(review.id)}>Usuń</p>
-                                <p>Edytuj</p>
+                                <Link state={{ review: review }} to={`review/edit`}><p>Edytuj</p></Link>
                             </OwnActions>
                         )}
                     </FooterContainer>
